@@ -14,7 +14,7 @@ python importer.py --source arcgis   # MN ArcGIS state dataset
 python importer.py --source arcgis-osm  # ArcGIS + OpenStreetMap hours/contacts
 python app.py
 ```
-
+ 
 If PowerShell blocks activation, use:
 
 ```powershell
