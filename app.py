@@ -5,7 +5,7 @@ Serves the static front-end and a set of JSON endpoints used by the search UI.
 All provider data is read from the SQLite database written by importer.py.
 
 Endpoints:
-  GET /                   → static/index.html
+  GET /                   → docs/index.html
   GET /api/geocode        → resolve a city/ZIP string to lat/lng
   GET /api/locations      → distinct city+ZIP pairs with provider counts
   GET /api/ai-search      → natural-language search with scoring
@@ -21,7 +21,7 @@ from pathlib import Path
 
 BASE = Path(__file__).resolve().parent
 DB   = BASE / 'data' / 'childcare.db'
-app  = Flask(__name__, static_folder='static', static_url_path='')
+app  = Flask(__name__, static_folder='docs', static_url_path='')
 
 print(f'[startup] BASE={BASE}')
 print(f'[startup] DB={DB} exists={DB.exists()}')
@@ -544,7 +544,7 @@ def resolve_coordinates(parsed, caller_lat, caller_lng):
 # ── Flask routes ──────────────────────────────────────────────────────────────
 
 @app.get('/')
-def index(): return send_from_directory(app.static_folder, 'index.html')
+def index(): return send_from_directory(app.static_folder or '.', 'index.html')
 
 @app.get('/api/geocode')
 def api_geocode():
